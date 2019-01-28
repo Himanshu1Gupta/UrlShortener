@@ -53,6 +53,12 @@ public class IDConverter {
 			225908333, 105841497, 419893170, 370491871, 973776295, 666089653, 281978704, 96104481 };
 	private static int mod = (int) 1e9 + 7;
 
+	/**
+	 * To initialize mapping of char to number - called in static block
+	 * 
+	 * @param 
+	 * @return 
+	 */
 	private static void initializeCharToIndexTable() {
 		charToIndexTable = new HashMap<Character, Integer>();
 		// 0->a, 1->b, ..., 25->z, ..., 52->0, 61->9
@@ -97,6 +103,12 @@ public class IDConverter {
 
 	}
 
+	/**
+	 * Add all possible characters in ArrayList - called in static block
+	 * 
+	 * @param 
+	 * @return 
+	 */
 	private static void initializeIndexToCharTable() {
 		// 0->a, 1->b, ..., 25->z, ..., 52->0, 61->9
 		indexToCharTable = new ArrayList<Character>();
@@ -117,6 +129,12 @@ public class IDConverter {
 		}
 	}
 
+	/**
+	 * Generate shortUrl for a given Id, internally calls Base10to62 encoding method
+	 * 
+	 * @param id- primary key of database, corresponding to which we generate UniqueString
+	 * @return shortUrl, in our case it is 7 character
+	 */
 	public static String createUniqueID(int id) {
 		List<Integer> base62ID = convertBase10ToBase62ID(id);
 		StringBuilder uniqueURLID = new StringBuilder();
@@ -130,6 +148,12 @@ public class IDConverter {
 		return s + g;
 	}
 
+	/**
+	 * converts id(Base10) to (uniqueString)Base62 
+	 * 
+	 * @param id- primary key of database, corresponding to which we generate UniqueString
+	 * @return LinkedList of Base62 characters, which we convert to String in createUniqueId
+	 */
 	private static List<Integer> convertBase10ToBase62ID(int id) {
 		LinkedList<Integer> digits = new LinkedList<Integer>();
 		while (id > 0) {
@@ -140,6 +164,13 @@ public class IDConverter {
 		return digits;
 	}
 
+	
+	/**
+	 * Generate Id for a given shortUrl, internally calls Base62to10 encoding and provide it with Character arraylist of ShortUrl 
+	 * 
+	 * @param UniqueString- corresponding to which we generate dictionary Key
+	 * @return Id 
+	 */
 	public static int getDictionaryKeyFromUniqueID(String uniqueID) {
 		List<Character> base62Number = new ArrayList<Character>();
 		for (int i = 0; i < uniqueID.length(); ++i) {
@@ -149,6 +180,13 @@ public class IDConverter {
 		return dictionaryKey;
 	}
 
+	
+	/**
+	 * converts uniqueString(Base62) to id(Base10) 
+	 * 
+	 * @param  List of Characters corresponding to which we generate dictionaryKey
+	 * @return id(dictionary key)
+	 */
 	private static int convertBase62ToBase10ID(List<Character> ids) {
 		int id = 0;
 		int exp = ids.size() - 1;
@@ -159,6 +197,13 @@ public class IDConverter {
 		return id;
 	}
 
+	
+	/**
+	 * Generate HashUrl for the longUrl 
+	 * 
+	 * @param longUrl - a string
+	 * @return hashValue - an integer
+	 */
 	public static int hashUrl(String longUrl) {
 		int len = longUrl.length();
 		
@@ -176,11 +221,24 @@ public class IDConverter {
 
     private static final Pattern URL_PATTERN = Pattern.compile(URL_REGEX);
     
+    
+    /**
+	 * Used to check whether the url is valid or not 
+	 * 
+	 * @param url -  a string
+	 * @return boolean - true if valid url otherwise false
+	 */
     public static boolean validateURL(String url) {
         Matcher m = URL_PATTERN.matcher(url);
         return m.matches();
     }
     
+    /**
+	 * Used to compare two Dates - if older date is year old than new
+	 * 
+	 * @param two dates 
+	 * @return return true if it is a year old otherwise false
+	 */
 	public static boolean compare(Date d1, Date d2) {
 		@SuppressWarnings("deprecation")
 		int y1 = d1.getYear();
