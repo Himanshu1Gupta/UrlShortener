@@ -14,7 +14,7 @@ public class CronScheduler {
 	@Autowired
 	private UrlShortenerService urlShortenerService;
 
-	@Scheduled(fixedDelay = 10000)
+	@Scheduled(cron = "0 40 12 * * ?")
 	public void run() throws InterruptedException {
 
 		LocalDate d = java.time.LocalDate.now();

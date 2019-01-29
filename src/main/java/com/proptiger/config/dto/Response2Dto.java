@@ -4,20 +4,25 @@ import java.io.Serializable;
 
 public class Response2Dto implements Serializable{
     
-	    private String report;
+	    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private String reports;
 	    
-	    public Response2Dto(String report) {
-	        this.report = report;
+	    public Response2Dto(String reports) {
+	        this.reports = reports;
 	    }
 
-		public String getReport() {
-			return report;
+		public String getReports() {
+			return reports;
 		}
 
-		public void setReport(String report) {
-			this.report = report;
+		public void setReports(String reports) {
+			this.reports = reports;
 		}
 
+	
 
 
 }

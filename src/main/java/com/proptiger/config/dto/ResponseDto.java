@@ -5,7 +5,11 @@ import java.io.Serializable;
 public class ResponseDto implements Serializable{
     
     
-    private String Url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String Url;
     
     public ResponseDto(String Url) {
         this.Url = Url;
